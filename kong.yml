@@ -1,0 +1,22 @@
+_format_version: "2.1"
+
+services:
+  - name: animals-service
+    url: http://host.docker.internal:7777
+    routes:
+      - name: animals-route
+        paths:
+          - /animals-api
+
+plugins:
+  - name: key-auth
+    service: animals-service
+    config:
+      key_names:
+      - apikey
+      key_in_body: true
+      key_in_query: true
+consumers:
+  - username: user1
+keyauth_credentials:
+  - consumer: user1

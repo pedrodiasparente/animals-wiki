@@ -1,0 +1,91 @@
+version: "3.7"
+services:
+  kong:
+    container_name: kong
+    restart: always
+    image: kong:latest
+    volumes:
+      - ./kong.yml:/usr/local/kong/declarative/kong.yml
+    environment:
+      - KONG_DATABASE=off
+      - KONG_DECLARATIVE_CONFIG=/usr/local/kong/declarative/kong.yml
+      - KONG_PROXY_ACCESS_LOG=/dev/stdout
+      - KONG_ADMIN_ACCESS_LOG=/dev/stdout
+      - KONG_PROXY_ERROR_LOG=/dev/stderr
+      - KONG_ADMIN_ERROR_LOG=/dev/stderr
+      - KONG_ADMIN_LISTEN=0.0.0.0:8001, 0.0.0.0:8444 ssl
+    ports:
+      - "8000:8000"
+      - "8443:8443"
+      - "127.0.0.1:8001:8001"
+      - "127.0.0.1:8444:8444"
+  mongo:
+    container_name: mongo
+    restart: always
+    environment:
+      MONGO_INITDB_DATABASE: Animals-auth
+    image: mongo
+  api:
+    container_name: api
+    build:
+      context: ./API
+      dockerfile: ./Dockerfile
+    restart: always
+#    links:
+#      - graphdb
+    networks:
+      default:
+        aliases:
+          - front-end
+  auth:
+    container_name: auth
+    build:
+      context: ./autenticacao
+      dockerfile: ./Dockerfile
+    restart: always
+    links:
+      - mongo
+    networks:
+      default:
+        aliases:
+          - auth
+  front-end:
+    container_name: front-end
+    restart: always
+    build:
+      context: ./frontend/animals
+      dockerfile: ./Dockerfile
+    ports:
+      - "12080:80"
+    links:
+      - kong
+      - api
+      - auth
+      - mongo
+#      - graphdb
+    networks:
+      default:
+        aliases:
+          - auth
+#  graphdb:
+#    container_name: graphdb
+#    # image: ontotext/graphdb:9.3.0-ee
+#    build:
+#      context: ./graphdb
+#      dockerfile: Dockerfile
+#      args:
+#        version: 9.3.0
+#    restart: always
+#    environment: 
+#      GDB_JAVA_OPTS: >-
+#        -Xmx2g -Xms2g
+#        -Dgraphdb.home=/opt/graphdb/home
+#        -Dgraphdb.workbench.importDirectory=/opt/graphdb/home/graphdb-import
+#        -Dgraphdb.workbench.cors.enable=true
+#        -Denable-context-index=true
+#        -Dentity-pool-implementation=transactional
+#        -Dhealth.max.query.time.seconds=60
+#        -Dgraphdb.append.request.id.headers=true
+#        -Dreuse.vars.in.subselects=true
+#    volumes:
+#      - ./graphdb-data:/opt/graphdb/home
