@@ -4,7 +4,8 @@ module.exports = {
   ],
   configureWebpack: {
     devServer: {
-      host: '10.1.1.1'
+      port: 12080,
+      host: '0.0.0.0'
     }
   }
 }
