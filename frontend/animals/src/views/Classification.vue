@@ -43,7 +43,7 @@
             immediate: true,
                 handler(n) {
                     this.classification = n.id
-                    //axios.get('http://localhost:8000/animals-api/classifications/' + n.id + '?apikey=' + Vue.$cookies.get("key"))
+                    //axios.get('http://localhost:8100/animals-api/classifications/' + n.id + '?apikey=' + Vue.$cookies.get("key"))
                     axios.get('/kong/animals-api/classifications/' + n.id + '?apikey=' + Vue.$cookies.get("key"))
                     .then(dados => {
                         this.classifications=dados.data

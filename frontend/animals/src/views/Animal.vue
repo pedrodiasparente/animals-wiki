@@ -88,7 +88,7 @@
             Fact,
         },
         mounted () {
-            //axios.get('http://localhost:8000/animals-api/animals/' + this.$route.params.id + '?apikey=' + Vue.$cookies.get("key"))
+            //axios.get('http://localhost:8100/animals-api/animals/' + this.$route.params.id + '?apikey=' + Vue.$cookies.get("key"))
             axios.get('/kong/animals-api/animals/' + this.$route.params.id + '?apikey=' + Vue.$cookies.get("key"))
             .then(dados => {
                 if(dados.data == {})
@@ -106,7 +106,7 @@
                 handler(n) {
                     this.mapError=true
                     this.animal_id = n.id
-                    //axios.get('http://localhost:8000/animals-api/animals/' + n.id + '?apikey=' + Vue.$cookies.get("key"))
+                    //axios.get('http://localhost:8100/animals-api/animals/' + n.id + '?apikey=' + Vue.$cookies.get("key"))
                     axios.get('/kong/animals-api/animals/' + n.id + '?apikey=' + Vue.$cookies.get("key"))
                     .then(dados => {
                         if(dados.data == {})
