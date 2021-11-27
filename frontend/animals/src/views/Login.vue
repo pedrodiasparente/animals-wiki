@@ -78,7 +78,7 @@
                         console.log(data.data)
                         if (data.data) {
                             axios
-                                //.get('http://localhost:8001/consumers/user1/key-auth')
+                                //.get('http://localhost:8101/consumers/user1/key-auth')
                                 .get('/kong-auth/consumers/user1/key-auth')
                                 .then(response => {
                                     Vue.$cookies.set("key", response.data.data[0].key, "1d")
