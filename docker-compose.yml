@@ -24,7 +24,7 @@ services:
     restart: always
     environment:
       MONGO_INITDB_DATABASE: Animals-auth
-    image: mongo-users
+    image: mongo
   api:
     container_name: api
     build:
