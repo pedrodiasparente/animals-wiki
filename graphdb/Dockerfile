@@ -1,28 +1,19 @@
-FROM adoptopenjdk/openjdk11:alpine
+FROM khaller/graphdb-free:9.10.0
 
 # Build time arguments
-ARG version=9.1.1
-ARG edition=free
 
-ENV GRAPHDB_PARENT_DIR=/opt/graphdb
-ENV GRAPHDB_HOME=${GRAPHDB_PARENT_DIR}/home
+RUN mkdir -p /repository.init/toLoad
 
-ENV GRAPHDB_INSTALL_DIR=${GRAPHDB_PARENT_DIR}/dist
+COPY config.ttl /repository.init/toLoad/config.ttl
 
-ADD graphdb-${edition}-${version}-dist.zip /tmp
+COPY animals-complete.ttl /repository.init/toLoad/animals-complete.ttl
 
-RUN apk add --no-cache bash util-linux procps net-tools busybox-extras wget less curl && \
-    mkdir -p ${GRAPHDB_PARENT_DIR} && \
-    cd ${GRAPHDB_PARENT_DIR} && \
-    unzip /tmp/graphdb-${edition}-${version}-dist.zip && \
-    rm /tmp/graphdb-${edition}-${version}-dist.zip && \
-    mv graphdb-${edition}-${version} dist && \
-    mkdir -p ${GRAPHDB_HOME}
+RUN ls /repository.init/toLoad
 
-ENV PATH=${GRAPHDB_INSTALL_DIR}/bin:$PATH
+#RUN mkdir -p /animals/toLoad
 
-CMD ["-Dgraphdb.home=/opt/graphdb/home"]
+#COPY config.ttl animals/toLoad/config.ttl
 
-ENTRYPOINT ["/opt/graphdb/dist/bin/graphdb"]
+#COPY animals-complete.ttl animals/toLoad/animals-complete.ttl
 
-EXPOSE 7200
+#RUN /bin/sh -c /opt/graphdb/bin/loadrdf -f -c animals/toLoad/config.ttl -m parallel animals/toload/animals-complete.ttl
