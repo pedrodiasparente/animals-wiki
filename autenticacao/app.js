@@ -9,7 +9,7 @@ var usersRouter = require('./routes/users');
 
 var mongoose = require('mongoose');
 
-mongoose.connect('mongodb://mongo:27017/Animals-auth', 
+mongoose.connect('mongodb://mongo-users:27017/Animals-auth', 
       { useNewUrlParser: true,
         useUnifiedTopology: true,
         serverSelectionTimeoutMS: 5000});

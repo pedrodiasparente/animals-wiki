@@ -19,12 +19,12 @@ services:
       - "8443:8443"
       - "127.0.0.1:8001:8001"
       - "127.0.0.1:8444:8444"
-  mongo:
-    container_name: mongo
+  mongo-users:
+    container_name: mongo-users
     restart: always
     environment:
       MONGO_INITDB_DATABASE: Animals-auth
-    image: mongo
+    image: mongo-users
   api:
     container_name: api
     build:
@@ -44,7 +44,7 @@ services:
       dockerfile: ./Dockerfile
     restart: always
     links:
-      - mongo
+      - mongo-users
     networks:
       default:
         aliases:
@@ -61,7 +61,7 @@ services:
       - kong
       - api
       - auth
-      - mongo
+      - mongo-users
 #      - graphdb
     networks:
       default:
