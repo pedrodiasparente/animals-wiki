@@ -36,7 +36,7 @@ services:
     networks:
       default:
         aliases:
-          - front-end
+          - front-end-animals
   auth:
     container_name: auth
     build:
@@ -49,8 +49,8 @@ services:
       default:
         aliases:
           - auth
-  front-end:
-    container_name: front-end
+  front-end-animals:
+    container_name: front-end-animals
     restart: always
     build:
       context: ./frontend/animals
