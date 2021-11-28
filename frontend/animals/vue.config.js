@@ -4,7 +4,7 @@ module.exports = {
   ],
   configureWebpack: {
     devServer: {
-      port: 12080,
+      port: 12090,
       host: 'epl.di.uminho.pt'
     }
   }

@@ -58,7 +58,7 @@ services:
       context: ./frontend/animals
       dockerfile: ./Dockerfile
     ports:
-      - "12080:80"
+      - "12090:80"
     links:
       - kong
       - api
