@@ -25,6 +25,7 @@ services:
     environment:
       MONGO_INITDB_DATABASE: Animals-auth
     image: mongo
+    volumes: /data/db
   api:
     container_name: api
     build:
