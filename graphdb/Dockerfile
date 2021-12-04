@@ -1,14 +1,18 @@
 FROM khaller/graphdb-free:9.10.0
 
+#FROM zzglider/mygraphdb:prc2021
+
 # Build time arguments
 
-RUN mkdir -p /repository.init/toLoad
+ENV GDB_HEAP_SIZE=2G
 
-COPY config.ttl /repository.init/toLoad/config.ttl
+RUN mkdir -p /repository.init/Animals
 
-COPY animals-complete.ttl /repository.init/toLoad/animals-complete.ttl
+RUN mkdir -p /temporary-folder
 
-RUN ls /repository.init/toLoad
+COPY animals-complete.ttl /repository.init/Animals/toLoad/animals-complete.ttl
+
+COPY config.ttl /repository.init/Animals/config.ttl
 
 #RUN mkdir -p /animals/toLoad
 
@@ -16,4 +20,6 @@ RUN ls /repository.init/toLoad
 
 #COPY animals-complete.ttl animals/toLoad/animals-complete.ttl
 
-#RUN /bin/sh -c /opt/graphdb/bin/loadrdf -f -c animals/toLoad/config.ttl -m parallel animals/toload/animals-complete.ttl
+#RUN /bin/sh -c /opt/graphdb/bin/loadrdf -f -c /repository.init/Animals/config.ttl -m parallel /repository.init/Animals/toLoad/animals-complete.ttl
+
+RUN /opt/graphdb/bin/preload -f -c /repository.init/Animals/config.ttl /repository.init/Animals/toLoad/animals-complete.ttl -b=1000 -queue.folder=/temporary-folder

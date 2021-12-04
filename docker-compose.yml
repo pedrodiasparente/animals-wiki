@@ -33,8 +33,8 @@ services:
       context: ./API
       dockerfile: ./Dockerfile
     restart: always
-#    links:
-#      - graphdb
+    links:
+      - graphdb
     networks:
       default:
         aliases:
@@ -64,19 +64,19 @@ services:
       - api
       - auth
       - mongo-users
-#      - graphdb
+      - graphdb
     networks:
       default:
         aliases:
           - auth
-#  graphdb:
-#    container_name: graphdb
-#    image: khaller/graphdb-free:9.10.0
-#    #image: zzglider/clav-graphdb:1.0.0
-#    #image: zzglider/mygraphdb:prc2021
-#    build:
-#      context: ./graphdb
-#      dockerfile: ./Dockerfile
-#    restart: always
-#    ports:
-#      - "9200:7200"
+  graphdb:
+    container_name: graphdb
+    image: khaller/graphdb-free:9.10.0
+    #image: zzglider/clav-graphdb:1.0.0
+    #image: zzglider/mygraphdb:prc2021
+    build:
+      context: ./graphdb
+      dockerfile: ./Dockerfile
+    restart: always
+    ports:
+      - "9200:7200"
