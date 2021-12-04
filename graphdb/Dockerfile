@@ -22,4 +22,4 @@ COPY config.ttl /repository.init/Animals/config.ttl
 
 #RUN /bin/sh -c /opt/graphdb/bin/loadrdf -f -c /repository.init/Animals/config.ttl -m parallel /repository.init/Animals/toLoad/animals-complete.ttl
 
-RUN /opt/graphdb/bin/preload -f -c /repository.init/Animals/config.ttl /repository.init/Animals/toLoad/animals-complete.ttl -b=1000 -queue.folder=/temporary-folder
+#RUN /opt/graphdb/bin/preload -f -c /repository.init/Animals/config.ttl /repository.init/Animals/toLoad/animals-complete.ttl -b=1000 -queue.folder=/temporary-folder
