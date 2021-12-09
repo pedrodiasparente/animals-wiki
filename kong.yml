@@ -2,11 +2,11 @@ _format_version: "2.1"
 
 services:
   - name: animals-service
-    url: http://host.docker.internal:7777
+    url: http://api:7777
     routes:
       - name: animals-route
         paths:
-          - /animals-api
+          - /
 
 plugins:
   - name: key-auth

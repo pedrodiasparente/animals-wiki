@@ -9,13 +9,13 @@ var prefixes = `
         `
 
 exports.execQuery = async function (query) {
-    var getLink = "http://graphdb:7200/repositories/Animals?query="
+    var getLink = "http://graphdb:7200/repositories/animals?query="
     var encoded = encodeURIComponent(prefixes + query)
     return axios.get(getLink + encoded)
 }
 
 exports.execTransaction = async function (query) {
-    var postLink = "http://graphdb:7200/repositories/Animals/statements"
+    var postLink = "http://graphdb:7200/repositories/animals/statements"
     var encoded = encodeURIComponent(prefixes + query)
     var response
     try {

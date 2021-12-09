@@ -48,9 +48,10 @@ router.get('/', async function(req, res, next) {
                     img: graphdb.pair2Value(elem.img)
                 }
             })
+
             res.status(200).jsonp(animals)
         })
-        .catch(err => res.status(500).jsonp(err))   
+        .catch(err => res.status(500).jsonp('coisas e rabiscos' + err))
 })
 
 router.get('/:animal', function(req, res){

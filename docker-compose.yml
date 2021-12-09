@@ -14,11 +14,6 @@ services:
       - KONG_PROXY_ERROR_LOG=/dev/stderr
       - KONG_ADMIN_ERROR_LOG=/dev/stderr
       - KONG_ADMIN_LISTEN=0.0.0.0:8001, 0.0.0.0:8444 ssl
-#    ports:
-#      - "8000:8000"
-#      - "8443:8443"
-#      - "127.0.0.1:8001:8001"
-#      - "127.0.0.1:8444:8444"
   mongo-users:
     container_name: mongo-users
     restart: always
@@ -72,8 +67,8 @@ services:
   graphdb:
     container_name: graphdb
     image: khaller/graphdb-free:9.10.0
-    #image: zzglider/clav-graphdb:1.0.0
-    #image: zzglider/mygraphdb:prc2021
+    ports:
+      - "9200:7200"
     build:
       context: ./graphdb
       dockerfile: ./Dockerfile
