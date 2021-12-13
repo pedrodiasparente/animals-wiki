@@ -15,7 +15,7 @@
             <input class="loginBox" v-model="username" placeholder="Username">
         </div>
         <div class="logins">
-            <input class="loginBox" v-model="password" placeholder="Password" color="white">
+            <input class="loginBox" v-model="password" type="password" placeholder="Password" color="white">
         </div>
         <div class="buttons">
             
@@ -68,7 +68,7 @@
                 axios({
                     method: 'post',
                     //url: 'http://localhost:9000/users/login',
-                    url: '/auth/users/login',
+                    url: '/kong/auth/users/login',
                     data: {
                         username: this.username,
                         password: this.password
