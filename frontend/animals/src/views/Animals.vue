@@ -62,7 +62,7 @@
                 handler(n) {
                     let v = '&'
                     if (!n) v = '?'
-                    axios.get('/kong/animals-api/animals' + n + v + 'apikey=' + Vue.$cookies.get("key"))
+                    axios.get(/*/kong*/'/animals-api/animals' + n + v + 'apikey=' + Vue.$cookies.get("key"))
                     .then(dados => {
                         if(this.$route.query.name){
                             dados.data = dados.data.filter(elem => {
