@@ -68,7 +68,7 @@
                 axios({
                     method: 'post',
                     //url: 'http://localhost:9000/users/login',
-                    url: '/kong/auth/users/login',
+                    url: '/kong/auth/users/logins',
                     data: {
                         username: this.username,
                         password: this.password
