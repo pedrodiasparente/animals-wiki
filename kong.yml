@@ -7,7 +7,7 @@ services:
       - name: animals-route
         paths:
           - /animals-api
-  - name: auth-service
+  - name: auth_service
     url: http://auth:9000
     routes:
       - name: auth-route
